@@ -1,6 +1,10 @@
 import { Box, Card, Stack, useMediaQuery } from '@mui/material'
 import { LazyImage } from '../App'
 import { useNavigate } from 'react-router-dom'
+import cricketBallImg from "../assets/Cricket-Bat-Ball.jpg"
+import repairWeb from "../assets/reapirweb.webp"
+
+
 
 const RenderServiceAvailable = () => {
     const mobile = useMediaQuery("(max-width:600px)")
@@ -29,7 +33,7 @@ const RenderServiceAvailable = () => {
             }}
             >
                 <Stack width="100%" height={"90%"}>
-                    <LazyImage src='/src/assets/Cricket-Bat-Ball.jpg' alt='repair' style={{ width: "100%", height: "100%" }} />
+                    <LazyImage src={cricketBallImg} alt='repair' style={{ width: "100%", height: "100%" }} />
                 </Stack>
 
                 <Stack width="100%" height="10%" bgcolor={"white"} direction="row" spacing={2}>
@@ -61,12 +65,12 @@ const RenderServiceAvailable = () => {
                 onClick={() => navigate("/repair_details")}>
                 <Stack width="100%" height="90%" sx={{
                     display: "flex",
-                    backgroundImage: "url(./reapirweb.webp)",
+                    backgroundImage: `url(${repairWeb})`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }}>
-                    <LazyImage src='/src/assets/reapirweb.webp' alt='repair' style={{
+                    <LazyImage src={repairWeb} alt='repair' style={{
                         width: "100%",
                         height: "100%",
                         cursor: "pointer"

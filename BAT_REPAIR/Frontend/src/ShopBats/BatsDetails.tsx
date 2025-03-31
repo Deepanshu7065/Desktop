@@ -220,10 +220,10 @@ const BatsDetails = () => {
                             gap: { xs: "1rem", md: "2rem" }
                         }}>
                             {[
-                                { img: "/src/assets/5637246.png", text: "Home Delivery" },
-                                { img: "/src/assets/replace-pictures.png", text: "7 Days Replacement" },
-                                { img: "/src/assets/Business-icons-06-512.webp", text: "Cash On Delivery" },
-                                { img: "/src/assets/imagesSecure.png", text: "Secure Payment" }
+                                { img: "../assets/5637246.png", text: "Home Delivery" },
+                                { img: "../assets/replace-pictures.png", text: "7 Days Replacement" },
+                                { img: "../assets/Business-icons-06-512.webp", text: "Cash On Delivery" },
+                                { img: "../assets/imagesSecure.png", text: "Secure Payment" }
                             ].map((item, index) => (
                                 <Box key={index} sx={{
                                     display: "flex",

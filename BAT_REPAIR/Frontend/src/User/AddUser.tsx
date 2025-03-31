@@ -115,7 +115,7 @@ const AddUser = () => {
                     position: "relative",
                 }}>
                     <LazyImage
-                        src={"/src/assets/cricket.avif"}
+                        src={"../assets/cricket.avif"}
                         alt="Slider"
                         style={{
                             width: "100%",

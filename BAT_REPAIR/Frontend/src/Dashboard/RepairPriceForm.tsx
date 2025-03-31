@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../Store'
 import { RepairAddPrice } from '../AllPostApi'
+import repairPriceImage from '../assets/pngtree-icc-cricket-world-match-background-image_13943187.jpg'
 
 const RepairPriceForm = () => {
     const { user } = useSelector((state: RootState) => state.CustomerUser)
@@ -84,7 +85,7 @@ const RepairPriceForm = () => {
                 left: 0,
                 width: "100%",
                 height: "100%",
-                backgroundImage: "url(/src/assets/pngtree-icc-cricket-world-match-background-image_13943187.jpg)",
+                backgroundImage: `url(${repairPriceImage})`,
                 backgroundSize: "cover",
                 zIndex: 1
             }}>

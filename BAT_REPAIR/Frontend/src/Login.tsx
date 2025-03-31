@@ -4,7 +4,7 @@ import { loginVerify, postUser, } from "./AllPostApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCustomerUser } from "./Store/CustomerUserSaveSlice";
-
+import cricketBackground from "./assets/cricket.avif"
 
 const AuthContainer = () => {
     const [page, setPage] = useState("login");
@@ -48,7 +48,7 @@ const Login = ({ setPage }: any) => {
                 height: "100%",
                 top: 0,
                 left: 0,
-                backgroundImage: "url(./src/assets/cricket.avif)",
+                backgroundImage: `url(${cricketBackground})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -169,7 +169,7 @@ const Register = ({ setPage }: any) => {
                 height: "100%",
                 top: 0,
                 left: 0,
-                backgroundImage: "url(./src/assets/cricket.avif)",
+                backgroundImage: `url(${cricketBackground})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",

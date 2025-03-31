@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux"
 import { setUserId } from "../Store/EditUserSlice"
 import { CustomPagination } from "../ShopBats/AddBatsForm"
 import { LazyImage } from "../App"
+import userImage from '../assets/user_view.png'
 
 
 const User = () => {
@@ -388,7 +389,7 @@ const User = () => {
                         flexDirection: "column",
                         gap: 2
                     }}>
-                        <LazyImage src="/src/assets/user_view.png" alt="bat" style={{
+                        <LazyImage src={userImage} alt="bat" style={{
                             width: "50%",
                             borderRadius: "50%"
                         }} />

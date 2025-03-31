@@ -14,12 +14,13 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { pages } from './Pages/page';
-import { ShoppingCart } from '@mui/icons-material';
+import { HelpCenterOutlined, ShoppingCart } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './Store';
 import { Button } from '@mui/material';
-import { logoutCustomerUser,  } from './Store/CustomerUserSaveSlice';
-import { LazyImage } from './App';
+import { logoutCustomerUser, } from './Store/CustomerUserSaveSlice';
+// import { LazyImage } from './App';
+// import imageHelp from '../assets/Crack.webp'
 
 
 const Navbar = () => {
@@ -259,15 +260,10 @@ const Navbar = () => {
                             <Tooltip title="Your Tickets" sx={{
                             }} onClick={() => navigate("/tickets")}>
                                 <div>
-
-                                    <LazyImage src="/src/assets/imagesHelp.png" alt="" style={{
-                                        width: "30px",
-                                        height: "30px",
-                                        borderRadius: "50%",
-                                        cursor: "pointer"
-                                    }}
-
-                                    />
+                                    <HelpCenterOutlined sx={{
+                                        width: 30,
+                                        height: 30
+                                    }} />
                                 </div>
                             </Tooltip>
                             {/* )} */}

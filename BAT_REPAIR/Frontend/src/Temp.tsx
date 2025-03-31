@@ -52,7 +52,7 @@ const CricketBatRepair = () => {
                     left: 0,
                     width: "100%",
                     height: "100%",
-                    backgroundImage: "url('/src/assets/tempbg.jpg')",
+                    backgroundImage: "url('../assets/tempbg.jpg')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     filter: "blur(4px)",
@@ -68,7 +68,7 @@ const CricketBatRepair = () => {
                             marginBottom: "20px",
                             marginTop: "-40px"
                         }}>
-                            <img src="/src/assets/header.png" alt="Cricket Bat Repair" style={{
+                            <img src="../assets/header.png" alt="Cricket Bat Repair" style={{
                                 width: "50%",
                                 marginBottom: "20px",
                                 height: "150px"

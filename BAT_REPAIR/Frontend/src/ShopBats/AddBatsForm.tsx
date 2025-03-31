@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Store';
 import { Footer } from '../User/AddUser';
 import { LazyImage } from '../App';
+import addImage from "../assets/cricket.avif"
 
 const steps = [
     { label: 'Product Details' },
@@ -397,7 +398,7 @@ export default function AddBatsForm() {
                             justifyContent: "flex-start",
                         }}
                     >
-                        <LazyImage src={"/src/assets/cricket.avif"}
+                        <LazyImage src={addImage}
                             alt=''
                             style={{
                                 width: "100%",

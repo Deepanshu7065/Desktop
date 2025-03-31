@@ -5,26 +5,27 @@ import { Box, Button, Card, CardContent, colors, LinearProgress, Skeleton, Stack
 // import { RootState } from '../Store'
 import moment from 'moment'
 import io from "socket.io-client"
-import { ContactReplMessage,  } from '../AllPostApi'
+import { ContactReplMessage, } from '../AllPostApi'
 import { useNavigate } from 'react-router-dom'
 import { ThumbUp } from '@mui/icons-material'
-import { socketUrl } from '../ApiEndPoint'
+// import { socketUrl } from '../ApiEndPoint'
 import { useDispatch } from 'react-redux'
 import { updateTicketStatus } from '../Store/UpdateTicketStatus'
 
 
-export const socket = io(socketUrl, {
-    transports: ["websocket"],
+export const socket = io("https://null-starts-expected-detection.trycloudflare.com", {
+    transports: ["websocket", "polling"],
+    secure: true,
+    reconnection: true,
     reconnectionAttempts: 5,
-    timeout: 5000,
+    timeout: 20000
 });
-
 
 
 const AllTickets = () => {
     // const { user } = useSelector((state: RootState) => state.CustomerUser)
     const navigate = useNavigate()
-    const { data = [],  isLoading } = GetAllTicketsApi()
+    const { data = [], isLoading } = GetAllTicketsApi()
     const [ticketId, setTicketId] = useState("")
     const [replyMessage, setReplyMessage] = useState("")
     const messagesEndRef = useRef<HTMLDivElement | null>(null)

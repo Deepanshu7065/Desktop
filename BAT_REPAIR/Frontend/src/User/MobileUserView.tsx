@@ -230,7 +230,7 @@ const MobileUserView = () => {
                                         </Typography>
                                     </div>
                                     <div>
-                                        <LazyImage src='/src/assets/user_view.png' alt='user' style={{ width: "50px", height: "50px" }} />
+                                        <LazyImage src='../assets/user_view.png' alt='user' style={{ width: "50px", height: "50px" }} />
                                     </div>
                                 </Stack>
                                 <Chip sx={{

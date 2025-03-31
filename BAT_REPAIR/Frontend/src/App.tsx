@@ -105,7 +105,7 @@ function App() {
               width: "100vw",
             }}>
               <LazyImage
-                src="/src/assets/loadinglive.gif"
+                src="../assets/loadinglive.gif"
                 alt="Loading..."
                 style={{
                   width: "30%",

@@ -2,29 +2,33 @@ import { Box, Paper, Typography, Button, colors, Card } from "@mui/material";
 import RenderServiceAvailable from "./RenderServiceAvailable";
 import { useNavigate } from "react-router-dom";
 import { LazyImage } from "../App";
+import kikoimg from "../assets/kiko.webp"
+import gradeImg from "../assets/grade.webp"
+import repairImg from "../assets/repair.webp"
+import serviceFast from "../assets/serviceFast.jpg"
 
 const Dashboard = () => {
     const navigate = useNavigate()
 
     const CardData = [
         {
-            image: "/src/assets/kiko.webp",
+            image: kikoimg,
             title: "Quality Guarantee",
             label: "Premium materials and expert craftsmanship in every bat",
         },
         {
-            image: "/src/assets/grade.webp",
+            image: gradeImg,
             title: "Professional Grade",
             label: "Trusted ametaure and professional players",
         },
         {
-            title: "Bat Repair",
-            image: "/src/assets/repair.webp",
+            image: repairImg,
+            title: "Repair Services",
             label: "Quick and efficient repair services",
         },
         {
-            title: "Fast Services",
-            image: "/src/assets/serviceFast.jpg",
+            image: serviceFast,
+            title: "Service Fast",
             label: "Quick turnaround on all repairs service",
         }
     ]

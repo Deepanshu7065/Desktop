@@ -3,6 +3,7 @@ import { GetRepairDataPrice } from '../AllGetApi';
 import { imageUrl } from '../ApiEndPoint';
 import { Delete } from '@mui/icons-material';
 import { DeleteRepairPriceData } from '../AllPostApi';
+import backImage from '../assets/pngtree-icc-cricket-world-match-background-image_13943187.jpg'
 
 // Sample data for services
 // const services = [
@@ -76,7 +77,7 @@ const RepairDetails = () => {
                 left: 0,
                 width: "100vw",
                 height: "100vh",
-                backgroundImage: "url(/src/assets/pngtree-icc-cricket-world-match-background-image_13943187.jpg)",
+                backgroundImage: `url(${backImage})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",

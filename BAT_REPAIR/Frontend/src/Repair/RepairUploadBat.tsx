@@ -7,14 +7,20 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../Store';
 import { LazyImage } from '../App';
 import { GetRepairDataPrice, GetRepairDataPriceById } from '../AllGetApi';
+import repairBackImage from '../assets/pngtree-icc-cricket-world-match-background-image_13943187.jpg'
+import BatRepairimg from '../assets/BatRepairHd.webp'
+import HomeDelimg from '../assets/HomeDel.webp'
+import CustomerHomeimg from '../assets/CustomerHome.webp'
+import Qualityimg from '../assets/Quality.webp'
+import VanDelimg from '../assets/VanDel.webp'
 
 
 const imagesData = [
-    { src: '/src/assets/BatRepairHd.webp', text: 'Secure & Easy Bat Repair' },
-    { src: '/src/assets/HomeDel.webp', text: 'Pick up & Delivery Service' },
-    { src: '/src/assets/CustomerHome.webp', text: 'Delvery to Your Home ' },
-    { src: '/src/assets/Quality.webp', text: '100% Quality Bat Repair' },
-    { src: '/src/assets/VanDel.webp', text: 'Services and repair at your doorstep' }
+    { src: BatRepairimg, text: 'Secure & Easy Bat Repair' },
+    { src: HomeDelimg, text: 'Pick up & Delivery Service' },
+    { src: CustomerHomeimg, text: 'Delvery to Your Home ' },
+    { src: Qualityimg, text: '100% Quality Bat Repair' },
+    { src: VanDelimg, text: 'Services and repair at your doorstep' }
 ];
 
 const RepairUploadBat = () => {
@@ -142,7 +148,7 @@ const RepairUploadBat = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            backgroundImage: "url(/src/assets/pngtree-icc-cricket-world-match-background-image_13943187.jpg)",
+            backgroundImage: `url(${repairBackImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             position: "relative",
