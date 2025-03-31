@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Pacifico&display=swap');
+
+* {
+    font-family: 'Poppins', cursive;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cursive {
+    font-family: 'Poppins', cursive;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+
+
+
+.table_size table {
+    width: 100%;
+    padding: 10px;
+}
+
+.table_size tr td {
+    padding: 5px;
+}
+
+.table_cart table {
+    width: 100%;
+    padding: 10px;
+    border-collapse: collapse;
+    border: 1px solid rgb(177, 173, 173);
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.table_cart tr td {
+    padding: 15px;
+    border: none;
+    font-size: 14px;
+    font-weight: 900;
+    font-family: 'Dancing Script', cursive;
+}
+
+.table_cart tr th {
+    padding: 10px;
+    border: 1px solid rgb(177, 173, 173);
+    color: rgb(148, 144, 144);
+    text-align: left;
+    font-size: 14px;
+    font-weight: 900;
+    font-family: 'Poppins', monospace;
+}
+
+
+.table_user_all table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid rgb(177, 173, 173);
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.table_user_all tr td {
+    padding: 15px;
+    border: none;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: 'Poppins', monospace;
+    align-items: flex-start;
+}
+
+.table_user_all tr th {
+    padding: 10px;
+    border: 1px solid rgb(177, 173, 173);
+    color: rgb(148, 144, 144);
+    text-align: left;
+    font-size: 14px;
+    font-weight: 900;
+    font-family: monospace;
+}
