@@ -1,7 +1,7 @@
-import {  useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { baseUrl } from "./ApiEndPoint"
-import { AddCartTypes,  AllOrderTypesCompleted, AllProductsTypes, AllSingleMyOrderTypes, AllUserTypes, ContactsAllTypes, OrderTypes, ProductTypes, RepairPriceTypes } from "./AllTypes"
+import { AddCartTypes, AllOrderTypesCompleted, AllProductsTypes, AllSingleMyOrderTypes, AllUserTypes, ContactsAllTypes, OrderTypes, ProductTypes, RepairPriceTypes } from "./AllTypes"
 
 export const getUsers = ({
     search,
@@ -353,6 +353,7 @@ export const GetRepairDataPrice = () => {
         queryFn: getRepair,
     })
 }
+
 
 export const GetRepairDataPriceById = ({ id }: { id: string }) => {
     const getRepair = async () => {

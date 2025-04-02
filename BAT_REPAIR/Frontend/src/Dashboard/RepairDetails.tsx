@@ -1,9 +1,13 @@
-import { Box, Grid, Card, CardMedia, CardContent, Typography, Container } from '@mui/material';
-import { GetRepairDataPrice } from '../AllGetApi';
+import { Box, Grid, Card, CardMedia, CardContent, Typography, Container, Dialog, DialogTitle, DialogContent, TextField, Button } from '@mui/material';
+import { GetRepairDataPrice, GetRepairDataPriceById } from '../AllGetApi';
 import { imageUrl } from '../ApiEndPoint';
-import { Delete } from '@mui/icons-material';
-import { DeleteRepairPriceData } from '../AllPostApi';
+import { Delete, Edit } from '@mui/icons-material';
+import { DeleteRepairPriceData, UpdateRepairPrice } from '../AllPostApi';
 import backImage from '../assets/pngtree-icc-cricket-world-match-background-image_13943187.jpg'
+import { useSelector } from 'react-redux';
+import { RootState } from '../Store';
+import { useEffect, useState } from 'react';
+import { RepairPriceTypes } from '../AllTypes';
 
 // Sample data for services
 // const services = [
@@ -54,6 +58,7 @@ import backImage from '../assets/pngtree-icc-cricket-world-match-background-imag
 const RepairDetails = () => {
     const { data: services } = GetRepairDataPrice()
     const { mutateAsync } = DeleteRepairPriceData()
+    const { user } = useSelector((state: RootState) => state.CustomerUser)
 
     const handleDelete = async (id: string) => {
         try {
@@ -136,16 +141,19 @@ const RepairDetails = () => {
                                 bgcolor: "grey.400",
                                 height: "440px",
                             }}>
-                                <span style={{
-                                    position: "absolute",
-                                    top: 10,
-                                    right: 3,
-                                    zIndex: 2,
-                                    color: "red",
-                                    cursor: "pointer"
-                                }}>
-                                    <Delete onClick={() => handleDelete(service._id || "")} />
-                                </span>
+                                {user?.userType === "Admin" && (
+                                    <span style={{
+                                        position: "absolute",
+                                        top: 10,
+                                        right: 3,
+                                        zIndex: 2,
+                                        color: "red",
+                                        cursor: "pointer"
+                                    }}>
+                                        <EditRepairData data={service} />
+                                        <Delete onClick={() => handleDelete(service._id || "")} />
+                                    </span>
+                                )}
                                 <CardMedia
                                     component="img"
                                     height="300px"
@@ -190,3 +198,131 @@ const RepairDetails = () => {
 }
 
 export default RepairDetails;
+
+
+interface RepaitUpdateType {
+    repair_name: String;
+    price: Number;
+    description: String,
+    image: File | null
+}
+
+const EditRepairData = ({ data }: { data: RepairPriceTypes }) => {
+    const [open, setOpen] = useState(false);
+    const { data: repData, refetch } = GetRepairDataPriceById({ id: data?._id || "" })
+    const [updateData, setUpdateData] = useState<RepaitUpdateType>({
+        repair_name: "",
+        price: 0,
+        description: "",
+        image: null
+    })
+    const { mutateAsync } = UpdateRepairPrice()
+
+    useEffect(() => {
+        if (repData) {
+            setUpdateData({
+                repair_name: repData.repair_name,
+                price: repData.price,
+                description: repData.description,
+                image: null
+            })
+        }
+    }, [data])
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            setUpdateData({
+                ...updateData,
+                image: event.target.files[0]
+            })
+        }
+    }
+
+
+    const handleUpdate = async () => {
+        try {
+            const formData = new FormData();
+            formData.append("repair_name", String(updateData.repair_name) || "");
+            formData.append("price", String(updateData.price));
+            formData.append("description", String(updateData.description) || "");
+            if (updateData.image) {
+                formData.append("image", updateData.image);
+            }
+            const res: any = await mutateAsync({
+                id: data?._id || "",
+                data: formData
+            })
+            if (res.status === 200) {
+                setOpen(false)
+                refetch()
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    return (
+        <>
+            <Edit sx={{
+                color: "blue"
+            }}
+                onClick={() => setOpen(true)}
+            />
+            <Dialog
+                open={open}
+                onClose={() => setOpen(false)}
+            >
+                <DialogTitle>
+                    Edit Repair Price
+                </DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Repair Name"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        value={updateData.repair_name}
+                        onChange={(e) => setUpdateData({ ...updateData, repair_name: e.target.value })}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Price"
+                        type="number"
+                        fullWidth
+                        variant="standard"
+                        value={updateData.price}
+                        onChange={(e) => setUpdateData({ ...updateData, price: Number(e.target.value) })}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Description"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        value={updateData.description}
+                        onChange={(e) => setUpdateData({ ...updateData, description: e.target.value })}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Image"
+                        type="file"
+                        fullWidth
+                        variant="standard"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleImageChange(e)}
+                    />
+                    <Button onClick={handleUpdate} >Submit</Button>
+                </DialogContent>
+            </Dialog>
+        </>
+    )
+}

@@ -50,7 +50,17 @@ const ViewOrderDetailsMobile = () => {
     if (!data) {
         return <Typography variant="h5">No data available</Typography>;
     }
-
+    const handleRightClick = (event: React.MouseEvent, step: string) => {
+        if (step === "completed") {
+            event.preventDefault();
+            alert("Right-click action triggered for Completed status!");
+        }
+    };
+    if (!data) {
+        return (
+            <Typography variant="h5">No data available</Typography>
+        );
+    }
 
     return (
         <Box sx={{
@@ -140,9 +150,17 @@ const ViewOrderDetailsMobile = () => {
                         height: "100%",
                     }}
                 >
-                    {getSteps(data?.status || "pending").map((label) => (
-                        <Step key={label}>
-                            <StepLabel>{label}</StepLabel>
+                    {getSteps(data?.status || "pending").map((label, index) => (
+                        <Step key={label} completed={index <= getStatusIndex(data?.status || "pending")}>
+                            <StepLabel
+                                onContextMenu={(e) => handleRightClick(e, label)} // Right-click handler
+                                sx={{
+                                    cursor: label === "completed" ? "pointer" : "default", // Indicate right-click availability
+                                    color: label === "completed" ? "green" : "inherit",
+                                }}
+                            >
+                                {label}
+                            </StepLabel>
                         </Step>
                     ))}
                 </Stepper>
@@ -156,7 +174,7 @@ const ViewOrderDetailsMobile = () => {
                     p: 2,
                     boxShadow: 3,
                     flexDirection: "column",
-                    height: "100%"
+                    height: "fit-content"
                 }}>
                     <Typography sx={{ fontSize: 17, fontFamily: "monospace", mb: 2, alignSelf: "center" }}>
                         your Details :-

@@ -3,7 +3,7 @@ import { GetRepairAllUserById } from '../AllGetApi';
 import { imageUrl } from '../ApiEndPoint';
 import { LazyImage } from '../App';
 
-const ViewOrderDetails = ({ orderId,  }: { orderId: string }) => {
+const ViewOrderDetails = ({ orderId, }: { orderId: string }) => {
     const { data, isLoading } = GetRepairAllUserById({ id: orderId });
     const totalAmount = data?.repair_type?.reduce((total, item) => total + item.price, 0);
     if (isLoading) {
@@ -13,7 +13,7 @@ const ViewOrderDetails = ({ orderId,  }: { orderId: string }) => {
         if (status === "reject") {
             return ["Pending", "Rejected"];
         }
-        return ["Pending", "PickUp", "Processing", "Completed"];
+        return ["Pending", "PickUp", "Processing", "completed"];
     };
 
     const getStatusIndex = (status: string) => {
@@ -32,6 +32,13 @@ const ViewOrderDetails = ({ orderId,  }: { orderId: string }) => {
             <Typography variant="h5">No data available</Typography>
         );
     }
+    const handleRightClick = (event: React.MouseEvent, step: string) => {
+        if (step === "completed") {
+            event.preventDefault();
+            alert("Right-click action triggered for Completed status!");
+        }
+    };
+
 
     return (
         <Box sx={{
@@ -111,7 +118,7 @@ const ViewOrderDetails = ({ orderId,  }: { orderId: string }) => {
                             marginLeft: 14,
                             fontSize: 16
                         }}>
-                            &#8377;{data?.amount ? data?.amount : totalAmount}   
+                            &#8377;{data?.amount ? data?.amount : totalAmount}
                         </span>
                     </Typography>
                 </Stack>
@@ -257,9 +264,17 @@ const ViewOrderDetails = ({ orderId,  }: { orderId: string }) => {
                         height: "100%",
                     }}
                 >
-                    {getSteps(data?.status || "pending").map((label) => (
-                        <Step key={label}>
-                            <StepLabel>{label}</StepLabel>
+                   {getSteps(data?.status || "pending").map((label, index) => (
+                        <Step key={label} completed={index <= getStatusIndex(data?.status || "pending")}>
+                            <StepLabel
+                                onContextMenu={(e) => handleRightClick(e, label)} // Right-click handler
+                                sx={{
+                                    cursor: label === "completed" ? "pointer" : "default", // Indicate right-click availability
+                                    color: label === "completed" ? "green" : "inherit",
+                                }}
+                            >
+                                {label}
+                            </StepLabel>
                         </Step>
                     ))}
                 </Stepper>

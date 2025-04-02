@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, colors, Divider, FormControl, Input, Skeleton, Snackbar, Stack,  Typography } from "@mui/material"
+import { Box, Button, CircularProgress, colors, Divider, FormControl, Input, Skeleton, Snackbar, Stack, Typography } from "@mui/material"
 import { GetCartApi, GetProductById } from "../AllGetApi"
 import { imageUrl } from "../ApiEndPoint";
 import { useEffect, useState } from "react";
@@ -9,6 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../Store";
 import { useNavigate } from "react-router-dom";
 import { setProductDetails } from "../Store/ProductDetailsSlice";
+import homeDelevery from "../assets/5637246.png"
+import repalcement from "../assets/replace-pictures.png"
+import cod from "../assets/Business-icons-06-512.webp"
+import security from "../assets/imagesSecure.png"
 
 const BatsDetails = () => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -220,10 +224,10 @@ const BatsDetails = () => {
                             gap: { xs: "1rem", md: "2rem" }
                         }}>
                             {[
-                                { img: "../assets/5637246.png", text: "Home Delivery" },
-                                { img: "../assets/replace-pictures.png", text: "7 Days Replacement" },
-                                { img: "../assets/Business-icons-06-512.webp", text: "Cash On Delivery" },
-                                { img: "../assets/imagesSecure.png", text: "Secure Payment" }
+                                { img: homeDelevery, text: "Home Delivery" },
+                                { img: repalcement, text: "7 Days Replacement" },
+                                { img: cod, text: "Cash On Delivery" },
+                                { img: security, text: "Secure Payment" }
                             ].map((item, index) => (
                                 <Box key={index} sx={{
                                     display: "flex",

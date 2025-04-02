@@ -502,3 +502,22 @@ export const DeleteRepairPriceData = () => {
         }
     })
 }
+
+
+export const UpdateRepairPrice = () => {
+    const queryClient = useQueryClient()
+    const updateRepairPrice = async ({ id, data }: { id: string, data: any }) => {
+        try {
+            const response = await axios.patch(`${baseUrl}/price/update/${id}`, data)
+            return response
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return useMutation({
+        mutationFn: updateRepairPrice,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["repair"] })
+        }
+    })
+}

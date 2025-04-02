@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material'
-import  { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { GetSingleMyOrderApi } from '../AllGetApi';
 import { Forward } from '@mui/icons-material';
@@ -49,6 +49,18 @@ const ViewMyOrderDetailsMobile = () => {
 
     if (!data) {
         return <Typography variant="h5">No data available</Typography>;
+    }
+
+    const handleRightClick = (event: React.MouseEvent, step: string) => {
+        if (step === "completed") {
+            event.preventDefault();
+            alert("Right-click action triggered for Completed status!");
+        }
+    };
+    if (!data) {
+        return (
+            <Typography variant="h5">No data available</Typography>
+        );
     }
 
     const totalAmount = data?.order?.product_id?.reduce((total, product) => total + (product?.price ?? 0), 0);
@@ -243,9 +255,17 @@ const ViewMyOrderDetailsMobile = () => {
                         height: "100%",
                     }}
                 >
-                    {getSteps(data?.order.status || "pending").map((label) => (
-                        <Step key={label}>
-                            <StepLabel>{label}</StepLabel>
+                    {getSteps(data?.order?.status || "pending").map((label, index) => (
+                        <Step key={label} completed={index <= getStatusIndex(data?.order?.status || "pending")}>
+                            <StepLabel
+                                onContextMenu={(e) => handleRightClick(e, label)}
+                                sx={{
+                                    cursor: label === "completed" ? "pointer" : "default",
+                                    color: label === "completed" ? "green" : "inherit",
+                                }}
+                            >
+                                {label}
+                            </StepLabel>
                         </Step>
                     ))}
                 </Stepper>

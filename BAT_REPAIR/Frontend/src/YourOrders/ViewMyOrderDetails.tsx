@@ -14,9 +14,9 @@ const ViewMyOrderDetails = ({ order_id }: { order_id: string }) => {
 
     const getSteps = (status: string) => {
         if (status === "reject") {
-            return ["Pending", "Rejected"];
+            return ["pending", "rejected"];
         }
-        return ["Pending", "PickUp", "Processing", "Completed"];
+        return ["pending", "pickUp", "processing", "completed"];
     };
 
     const getStatusIndex = (status: string) => {
@@ -30,6 +30,12 @@ const ViewMyOrderDetails = ({ order_id }: { order_id: string }) => {
         }
     };
 
+    const handleRightClick = (event: React.MouseEvent, step: string) => {
+        if (step === "completed") {
+            event.preventDefault();
+            alert("Right-click action triggered for Completed status!");
+        }
+    };
     if (!data) {
         return (
             <Typography variant="h5">No data available</Typography>
@@ -370,16 +376,24 @@ const ViewMyOrderDetails = ({ order_id }: { order_id: string }) => {
                 activeStep={getStatusIndex(data?.order?.status || "pending")}
                 alternativeLabel
                 sx={{
-                    mt: 12,
+                    mt: 4,
                     width: "100%",
                     position: "relative",
                     bottom: 5,
                     height: "100%",
                 }}
             >
-                {getSteps(data?.order?.status || "pending").map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
+                {getSteps(data?.order?.status || "pending").map((label, index) => (
+                    <Step key={label} completed={index <= getStatusIndex(data?.order?.status || "pending")}>
+                        <StepLabel
+                            onContextMenu={(e) => handleRightClick(e, label)} 
+                            sx={{
+                                cursor: label === "completed" ? "pointer" : "default", 
+                                color: label === "completed" ? "green" : "inherit",
+                            }}
+                        >
+                            {label}
+                        </StepLabel>
                     </Step>
                 ))}
             </Stepper>

@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux'
 import { updateTicketStatus } from '../Store/UpdateTicketStatus'
 
 
-export const socket = io("https://null-starts-expected-detection.trycloudflare.com", {
+export const socket = io("https://portsmouth-normally-comics-broker.trycloudflare.com", {
     transports: ["websocket", "polling"],
     secure: true,
     reconnection: true,

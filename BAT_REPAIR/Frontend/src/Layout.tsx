@@ -97,7 +97,7 @@ const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        Bat Repair
+                        Bat Master
                     </Typography>
 
                     <Box sx={{

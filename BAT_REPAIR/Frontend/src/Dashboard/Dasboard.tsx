@@ -129,7 +129,7 @@ const Dashboard = () => {
                 fontWeight: "bold",
                 fontFamily: "'Poppins', cursive"
             }}>
-                Why Choose BatMaster
+                Why Choose Bat Master
             </Typography>
             <Box sx={{
                 display: "flex",
