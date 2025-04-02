@@ -4,10 +4,11 @@ import { imageUrl } from '../ApiEndPoint';
 import { Delete, Edit } from '@mui/icons-material';
 import { DeleteRepairPriceData, UpdateRepairPrice } from '../AllPostApi';
 import backImage from '../assets/pngtree-icc-cricket-world-match-background-image_13943187.jpg'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Store';
 import { useEffect, useState } from 'react';
 import { RepairPriceTypes } from '../AllTypes';
+import { setRepairPriceEdit } from '../Store/RepairPriceEditSlice';
 
 // Sample data for services
 // const services = [
@@ -55,7 +56,9 @@ import { RepairPriceTypes } from '../AllTypes';
 //     },
 // ];
 
+
 const RepairDetails = () => {
+    const dispatch = useDispatch()
     const { data: services } = GetRepairDataPrice()
     const { mutateAsync } = DeleteRepairPriceData()
     const { user } = useSelector((state: RootState) => state.CustomerUser)
@@ -150,7 +153,7 @@ const RepairDetails = () => {
                                         color: "red",
                                         cursor: "pointer"
                                     }}>
-                                        <EditRepairData data={service} />
+                                        <Edit sx={{ color: 'blue' }} onClick={() => dispatch(setRepairPriceEdit(service._id || ""))} />
                                         <Delete onClick={() => handleDelete(service._id || "")} />
                                     </span>
                                 )}
@@ -201,15 +204,15 @@ export default RepairDetails;
 
 
 interface RepaitUpdateType {
-    repair_name: String;
-    price: Number;
-    description: String,
-    image: File | null
+    repair_name: string;
+    price: number;
+    description: string;
+    image: File | null;
 }
-
-const EditRepairData = ({ data }: { data: RepairPriceTypes }) => {
-    const [open, setOpen] = useState(false);
-    const { data: repData, refetch } = GetRepairDataPriceById({ id: data?._id || "" })
+export const EditRepairData = () => {
+    const dispatch = useDispatch()
+    const { id } = useSelector((state: RootState) => state.RepairPriceEdit)
+    const { data: repData, refetch } = GetRepairDataPriceById({ id: id || "" })
     const [updateData, setUpdateData] = useState<RepaitUpdateType>({
         repair_name: "",
         price: 0,
@@ -221,13 +224,13 @@ const EditRepairData = ({ data }: { data: RepairPriceTypes }) => {
     useEffect(() => {
         if (repData) {
             setUpdateData({
-                repair_name: repData.repair_name,
-                price: repData.price,
-                description: repData.description,
+                repair_name: repData.repair_name || "",
+                price: repData.price || 0,
+                description: repData.description || "",
                 image: null
             })
         }
-    }, [data])
+    }, [repData])
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
@@ -242,36 +245,33 @@ const EditRepairData = ({ data }: { data: RepairPriceTypes }) => {
     const handleUpdate = async () => {
         try {
             const formData = new FormData();
-            formData.append("repair_name", String(updateData.repair_name) || "");
-            formData.append("price", String(updateData.price));
-            formData.append("description", String(updateData.description) || "");
+            formData.append("repair_name", updateData.repair_name); 
+            formData.append("price", updateData.price.toString()); 
+            formData.append("description", updateData.description);
+
             if (updateData.image) {
                 formData.append("image", updateData.image);
             }
+
             const res: any = await mutateAsync({
-                id: data?._id || "",
+                id: id || "",
                 data: formData
-            })
+            });
+
             if (res.status === 200) {
-                setOpen(false)
-                refetch()
+                dispatch(setRepairPriceEdit(""));
+                refetch();
             }
+        } catch (error) {
+            console.log(error);
         }
-        catch (error) {
-            console.log(error)
-        }
-    }
+    };
 
     return (
         <>
-            <Edit sx={{
-                color: "blue"
-            }}
-                onClick={() => setOpen(true)}
-            />
             <Dialog
-                open={open}
-                onClose={() => setOpen(false)}
+                open={id !== ""}
+                onClose={() => dispatch(setRepairPriceEdit(""))}
             >
                 <DialogTitle>
                     Edit Repair Price

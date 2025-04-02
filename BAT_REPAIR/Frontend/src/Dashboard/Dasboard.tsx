@@ -209,7 +209,7 @@ const Dashboard = () => {
                     fontWeight: "bold",
                     fontFamily: "'Poppins', cursive"
                 }}>
-                    Ready to Enhance Your Batting Game?
+                    Ready to Enhance Bat Shop And Repair !
                 </Typography>
 
                 <Typography sx={{

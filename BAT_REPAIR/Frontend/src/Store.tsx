@@ -7,6 +7,7 @@ import ChangeStatusOrderSlice from "./Store/ChangeStatusByOrderSlice";
 import ChangeShopsStatusOrderSlice from "./Store/ChangeShopsOrderStatusSlice";
 import AddAddressCustomerSlice from "./Store/AddCustomerSaveAddressSlice"
 import updateTicketStatus from "./Store/UpdateTicketStatus";
+import RepairPriceEditSlice from "./Store/RepairPriceEditSlice";
 
 export const store = configureStore({
     reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
         ChangeStatusOrder: ChangeStatusOrderSlice,
         ChangeShopsStatusOrder: ChangeShopsStatusOrderSlice,
         AddAddressCustomer: AddAddressCustomerSlice,
-        TicketStatus: updateTicketStatus
+        TicketStatus: updateTicketStatus,
+        RepairPriceEdit: RepairPriceEditSlice,
 
     }
 })
